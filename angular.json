@@ -23,10 +23,17 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/assets/vendor/fontawesome-free/css/all.min.css",
+              "src/assets/vendor/bootstrap/bootstrap.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/vendor/jquery/jquery.min.js",
+              "src/assets/vendor/bootstrap/js/bootstrap.bundle.min.js",
+              "src/assets/vendor/jquery-easing/jquery.easing.min.js"
+            ]
           },
+        
           "configurations": {
             "production": {
               "fileReplacements": [

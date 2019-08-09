@@ -1,0 +1,87 @@
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light static-top mb-5 shadow">
+  <div class="container">
+    <a class="navbar-brand" href="#">Java Coder Testing</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <!-- <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home
+                <span class="sr-only">(current)</span>
+              </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Services</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Contact</a>
+        </li>
+      </ul> -->
+    </div>
+  </div>
+</nav>
+
+<!-- Page Content -->
+<div class="container">
+  <div class="card border-0 shadow my-5">
+    <div class="card-body p-5">
+        <h1 class="font-weight-light">Welcome to Java Coder Testing Environment</h1>
+      <div class="card card-register mx-auto mt-5">
+        <div class="card-header">Register an Account</div>
+        <div class="card-body">
+          <form [formGroup]="regForm" (ngSubmit)="add_newuser()">
+              <div class="error">{{strMessage}}</div>
+            <div class="form-group">
+              <div class="form-row">
+                <div class="col-md-6">
+                  <div class="form-label-group">
+                    <input type="text" id="firstName" class="form-control" placeholder="First name" formControlName="fname" autofocus="autofocus" [ngClass]="{ 'is-invalid': submitted && f.fname.errors }"> 
+                  </div>
+                  <div *ngIf="submitted && f.fname.errors" class="invalid-feedback">
+                      <div *ngIf="f.fname.errors.required">First Name Is Required</div> 
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-label-group">
+                    <input type="text" id="lastName" class="form-control" placeholder="Last name" formControlName="lname" [ngClass]="{ 'is-invalid': submitted && f.lname.errors }">
+                  </div>
+                  <div *ngIf="submitted && f.lname.errors" class="invalid-feedback">
+                      <div *ngIf="f.lname.errors.required">Last Name Is Required</div> 
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="form-row">
+                <div class="col-md-6">
+                  <div class="form-label-group">
+                    <input type="text" id="inputCPF" class="form-control" placeholder="Identification (CPF)" formControlName="cpf" [ngClass]="{ 'is-invalid': submitted && f.cpf.errors }">
+                  </div>
+                  <div *ngIf="submitted && f.cpf.errors" class="invalid-feedback">
+                      <div *ngIf="f.cpf.errors.required">Identification (CPF) Is Required</div> 
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-label-group">
+                    <input type="email" id="inputEmail" class="form-control" placeholder="Email Address" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                  </div>
+                  <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                      <div *ngIf="f.email.errors.required">Email Is Required</div> 
+                      <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block ">Register</button>
+          </form>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

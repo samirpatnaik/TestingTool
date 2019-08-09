@@ -1,0 +1,89 @@
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light static-top mb-5 shadow">
+  <div class="container">
+    <a class="navbar-brand" href="#">Java Coder Testing Challenge</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <!-- <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home
+                <span class="sr-only">(current)</span>
+              </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Services</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Contact</a>
+        </li>
+      </ul> -->
+    </div>
+  </div>
+</nav>
+
+<!-- Page Content -->
+<div class="container">
+  <div class="card border-0 shadow my-5">
+    <div class="card-body p-5">
+        <h1 class="font-weight-light">Welcome to Java Multiple Choice Challenge</h1>
+      <div class="card card-register mx-auto mt-5">
+        <div class="card-header">&nbsp;</div>
+        <div class="card-body">
+          <form [formGroup]="quizForm" (ngSubmit)="goTo(multipager.pageindex + 1);">
+          <div id="quiz" >          
+            <div *ngIf="mode=='quiz' && quiz">
+              <div *ngFor="let question of filteredQuestions;">
+                <div class="badge badge-info">Question {{multipager.pageindex + 1}} of {{multipager.count}}.</div>
+                <div *ngIf="config.duration" class="badge badge-info float-right">Time: {{ellapsedTime}} / {{parseTime(question.allowtime)}}</div>
+                <h3 class="font-weight-normal">{{multipager.pageindex + 1}}.
+                  <span [innerHTML]="question.name"></span>
+                </h3>
+                <div class="row text-left options">
+                  <div *ngIf="question.questionType=='multi'" class="col-6">
+                    <div class="option">
+                      <label class="font-weight-normal" [attr.for]="A">
+                        <input id="A" type="radio" formControlName="answer" value="A"  /> {{question.option1}}
+                      </label>
+                    </div>
+                    <div class="option">
+                      <label class="font-weight-normal" [attr.for]="B">
+                        <input id="B" type="radio" formControlName="answer" value="B" /> {{question.option2}}
+                      </label>
+                    </div>
+                    <div class="option">
+                      <label class="font-weight-normal" [attr.for]="C">
+                        <input id="C" type="radio" formControlName="answer" value="C" /> {{question.option3}}
+                      </label>
+                    </div>
+                    <div *ngIf="question.option4!=''" class="option">
+                      <label class="font-weight-normal" [attr.for]="D">
+                        <input id="D" type="radio" formControlName="answer" value="D" /> {{question.option4}}
+                      </label>
+                    </div>
+                    <div *ngIf="question.option5!=''" class="option">
+                      <label class="font-weight-normal" [attr.for]="E">
+                        <input id="E" type="radio" formControlName="answer" value="E" /> {{question.option5}}
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr />
+              <div class="text-center">
+                <button type="submit" class="btn btn-primary" >Next</button>
+              </div>
+            </div>
+          
+            
+          </div>
+        </form>  
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
