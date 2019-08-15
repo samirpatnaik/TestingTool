@@ -108,7 +108,7 @@ export class QuizComponent implements OnInit {
         'answered': this.quizForm.controls['answer'].value,
         'qtype': 'multi'
       };
-      this._quizservice.addanswer(answers).subscribe(result =>{});
+      this._quizservice.addmultianswer(answers).subscribe(result =>{});
     }
 
     if (pageindex >= 0 && pageindex < this.multipager.count) {  

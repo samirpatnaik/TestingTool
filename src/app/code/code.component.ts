@@ -3,6 +3,7 @@ import {QuizService} from '../services/quiz.service'
 import {JavaCodeModel} from '../models/javaCodeModel';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LocationStrategy } from '@angular/common';
 
 import { CodeQuestion, CodeQuiz } from '../models/code/index';
 import {CodeQuizConfig} from '../models/code/codequiz-config';
@@ -21,8 +22,9 @@ export class CodeComponent implements OnInit {
 
   @ViewChild('editor') editor;
 
-  text:string = "";
+  text:string = "package br.com.compiler.test.controller;public class Test {  public static void main(String[] args) { new Test().doProcess(); }  private void doProcess() { // CODE TO RUN AND BUILD OUTPUT EXPECTED }}";
   starttest: boolean;
+  result:string;
 
   codequestionlist:JavaCodeModel[];
   data: any;
@@ -58,7 +60,13 @@ export class CodeComponent implements OnInit {
   codeellapsedTime = '00:00';
   codeduration = '';
 
-  constructor(private formBuilder: FormBuilder,private _codequizservice: QuizService, private router: Router,  private session: SessionStorageService) { }
+  constructor(private location: LocationStrategy,private formBuilder: FormBuilder,private _codequizservice: QuizService, private router: Router,  private session: SessionStorageService) { 
+    // preventing back button in browser  
+        history.pushState(null, null, window.location.href);  
+        this.location.onPopState(() => {
+          history.pushState(null, null, window.location.href);
+        }); 
+  }
 
   ngOnInit() {
 
@@ -87,6 +95,7 @@ export class CodeComponent implements OnInit {
        .subscribe(
          data=> {
           console.log(data);
+          this.result =data;
          },
          error=>console.error(error)
        )
@@ -125,7 +134,8 @@ export class CodeComponent implements OnInit {
       .subscribe(
         data=> {
           setTimeout(() => {
-            console.log(data);
+          //  console.log(data);
+            this.result = data;
           }, 1000);  //1s
         },
         error=>console.error(error)
@@ -164,13 +174,15 @@ export class CodeComponent implements OnInit {
   codegoTo(index: number) {
 
     if(index <= this.codepager.count){
+      
       let answers = {
         'userId': this.session.get('currentUser'),
         'quizId': this.codequiz.questions[index-1].id,
         'answered': this.text,
+        'output': this.result,
         'qtype': 'code'
       };
-      this._codequizservice.addanswer(answers).subscribe(result =>{});
+      this._codequizservice.addcodeanswer(answers).subscribe(result =>{});
     }
 
     if (index >= 0 && index < this.codepager.count) {  
@@ -179,7 +191,9 @@ export class CodeComponent implements OnInit {
       this.codetimer = setInterval(() => { this.codetick(index); }, 1000);
       this.codepager.index = index;
       this.mode = 'codequiz';
-      this.text = '';
+      this.text = "package br.com.compiler.test.controller;public class Test {  public static void main(String[] args) { new Test().doProcess(); }  private void doProcess() { // CODE TO RUN AND BUILD OUTPUT EXPECTED }}";
+      this.quizForm.controls['answer'].setValue('');
+      this.result ='';
     }
     else{
       this.starttest = false;

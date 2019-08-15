@@ -43,8 +43,16 @@ export class QuizService {
     
   }
 
-  addanswer(body:any){
-    return this._http.post('http://127.0.0.1:3000/multioption/addanswer',body,{
+  addmultianswer(body:any){
+    return this._http.post('http://127.0.0.1:3000/multioption/addmultianswer',body,{
+      observe:'body',
+      withCredentials:true,
+      headers:new HttpHeaders().append('Content-Type','application/json')
+    });
+  }
+
+  addcodeanswer(body:any){
+    return this._http.post('http://127.0.0.1:3000/javacode/addcodeanswer',body,{
       observe:'body',
       withCredentials:true,
       headers:new HttpHeaders().append('Content-Type','application/json')

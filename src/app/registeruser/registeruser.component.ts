@@ -41,6 +41,7 @@ export class RegisteruserComponent implements OnInit {
       this._registerservice.resiteruser(this.regForm.value)
       .subscribe(data =>{
         this.data = data;
+//        console.log(this.data);
         if(this.data === 'failed'){
           this.strMessage = "Account information already exists.";
         }

@@ -2,10 +2,9 @@ var express = require('express');
 var router = express.Router();
 var MultiQuestion = require('../models/multiple-option-questions');
 var PostedAnswer =  require('../models/submitted_answer');
-var {ObjectID} = require('mongodb');
 
-/* ADD New Question */
-router.post('/addanswer', function (req, res, next) {
+/* ADD New Answer */
+router.post('/addmultianswer', function (req, res, next) {
   addToDB(req, res);
 });
 
@@ -44,37 +43,7 @@ router.get('/dashboard', (req,res) =>{
   
 });
 
-/* GET Multiple Option Question List By ID */
-router.get('/editmultiquestion/:id',isValidUser, (req,res) =>{
-  var id= req.params.id;
-  if(!ObjectID.isValid(id)){
-      return res.status(404).send();
-  }
 
-  MultiQuestion.findById(id).then((resultArray)=>{
-      if(!resultArray){
-        return res.status(404).send();
-      }
-      res.send(resultArray);
-  },(err)=>{
-      res.status(400).send(err);
-  });
-});
-
-/* Update existing question */
-router.post('/updatemultiquestion',isValidUser, function(req, res) {
-    MultiQuestion.findOneAndUpdate({_id:req.body.rid}, req.body, function (err, place) {
-        res.send(place);
-    });
-});
-
-/* Delete question*/
-router.delete('/deletemultiquestion/:id',isValidUser, function(req, res, next) {
-  MultiQuestion.findByIdAndRemove(req.params.id, req.body, function (err, post) {
-    if (err) return next(err);
-    res.json(post);
-  });
-});
 
 /* Validate the user authentication */
 function isValidUser(req,res,next){

@@ -9,7 +9,7 @@ export class CodeQuiz {
             data.forEach(q => {
               this.questions.push(new CodeQuestion(q));
             });
-            console.log(this.questions);
+           // console.log(this.questions);
         }
     }
 }
