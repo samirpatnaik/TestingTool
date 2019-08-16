@@ -22,7 +22,26 @@ export class CodeComponent implements OnInit {
 
   @ViewChild('editor') editor;
 
-  text:string = "package br.com.compiler.test.controller;public class Test {  public static void main(String[] args) { new Test().doProcess(); }  private void doProcess() { // CODE TO RUN AND BUILD OUTPUT EXPECTED }}";
+  //text:string = "package br.com.compiler.test.controller;public class Test {  public static void main(String[] args) { new Test().doProcess(); }  private void doProcess() { // CODE TO RUN AND BUILD OUTPUT EXPECTED }}";
+  
+  text:string = `package br.com.compiler.test.controller;
+
+  public class Test {
+  
+   public static void main(String[] args) {
+  
+    new Test().doProcess();
+  
+   }
+  
+   private void doProcess() {
+  
+    // CODE TO RUN AND BUILD OUTPUT ESPECTED
+  
+   }
+  
+  } `;
+
   starttest: boolean;
   result:string;
 
@@ -88,10 +107,10 @@ export class CodeComponent implements OnInit {
 
   onCodeCompile() {
 
-    const codetotest =  {
-      "message": this.text
-    }
-    this._codequizservice.compilecode(codetotest)
+   /* const codetotest =  {
+      this.text
+    }*/
+    this._codequizservice.compilecode(this.text)
        .subscribe(
          data=> {
           console.log(data);
@@ -191,7 +210,23 @@ export class CodeComponent implements OnInit {
       this.codetimer = setInterval(() => { this.codetick(index); }, 1000);
       this.codepager.index = index;
       this.mode = 'codequiz';
-      this.text = "package br.com.compiler.test.controller;public class Test {  public static void main(String[] args) { new Test().doProcess(); }  private void doProcess() { // CODE TO RUN AND BUILD OUTPUT EXPECTED }}";
+      this.text = `package br.com.compiler.test.controller;
+
+        public class Test {
+        
+        public static void main(String[] args) {
+        
+          new Test().doProcess();
+        
+        }
+        
+        private void doProcess() {
+        
+          // CODE TO RUN AND BUILD OUTPUT ESPECTED
+        
+        }
+        
+        } `;
       this.quizForm.controls['answer'].setValue('');
       this.result ='';
     }
