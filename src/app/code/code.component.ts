@@ -43,6 +43,8 @@ export class CodeComponent implements OnInit {
   } `;
 
   starttest: boolean;
+  loading: boolean;
+
   result:string;
 
   codequestionlist:JavaCodeModel[];
@@ -110,10 +112,12 @@ export class CodeComponent implements OnInit {
    /* const codetotest =  {
       this.text
     }*/
+    this.loading = true;
     this._codequizservice.compilecode(this.text)
        .subscribe(
          data=> {
-          console.log(data);
+          this.loading =false;
+          //console.log(data);
           this.result =data;
          },
          error=>console.error(error)
@@ -124,6 +128,7 @@ export class CodeComponent implements OnInit {
 
     var paramval:any;
     var resultval:any;
+    this.loading = true;
 
     for (let j = 0; j < this.codequiz.questions[index].inputItems.length; j++) {
       if(this.codequiz.questions[index].inputItems[j].param1 != ''){
@@ -154,6 +159,7 @@ export class CodeComponent implements OnInit {
         data=> {
           setTimeout(() => {
           //  console.log(data);
+          this.loading = false;
             this.result = data;
           }, 1000);  //1s
         },
